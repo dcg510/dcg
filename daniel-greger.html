@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel Greger — Principal Success Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F7F4EF;
+      --ink: #1A1A18;
+      --mid: #6B6B67;
+      --accent: #2A5C45;
+      --accent-light: #E8F0EC;
+      --rule: #DDD9D2;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 5vw;
+      background: rgba(247,244,239,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--mid); transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 5vw 5rem;
+      gap: 4rem;
+    }
+    .hero-text { max-width: 560px; }
+    .hero-eyebrow {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.25rem;
+      opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+    }
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-summary {
+      font-size: 1.05rem; font-weight: 300; color: var(--mid);
+      max-width: 480px; line-height: 1.75;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
+    }
+    .btn {
+      display: inline-block; text-decoration: none;
+      padding: 0.75rem 1.75rem; border-radius: 3px;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: #1e4433; }
+    .btn-outline { border: 1.5px solid var(--ink); color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: var(--white); }
+
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+      border: 1px solid var(--rule); border-radius: 6px;
+      overflow: hidden; align-self: center;
+      opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+    }
+    .stat {
+      padding: 2.25rem 1.75rem; background: var(--white);
+      border-right: 1px solid var(--rule); text-align: center;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem; color: var(--accent); line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--mid);
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 5vw; }
+    section:nth-child(even) { background: var(--white); }
+
+    .section-header { margin-bottom: 3.5rem; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.6rem; display: block;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      letter-spacing: -0.02em; line-height: 1.1;
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── ABOUT ── */
+    #about .about-grid {
+      display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start;
+    }
+    .about-body { font-size: 1.05rem; color: var(--mid); line-height: 1.8; }
+    .about-body p + p { margin-top: 1.25rem; }
+    .certifications { margin-top: 2.5rem; }
+    .cert-title {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink); margin-bottom: 1rem;
+    }
+    .cert-list { list-style: none; }
+    .cert-list li {
+      font-size: 0.88rem; color: var(--mid); padding: 0.55rem 0;
+      border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 0.6rem;
+    }
+    .cert-list li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+
+    .about-aside { padding-top: 0.5rem; }
+    .aside-block { margin-bottom: 2.5rem; }
+    .aside-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--mid); margin-bottom: 0.75rem;
+    }
+    .aside-value { font-size: 0.95rem; font-weight: 500; color: var(--ink); }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .tag {
+      font-size: 0.75rem; font-weight: 500;
+      background: var(--accent-light); color: var(--accent);
+      padding: 0.3rem 0.75rem; border-radius: 2px; letter-spacing: 0.04em;
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+      width: 1px; background: var(--rule);
+    }
+    .timeline-item { padding-left: 2.5rem; margin-bottom: 3.5rem; position: relative; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -4px; top: 8px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--white); border: 2px solid var(--accent);
+    }
+    .timeline-item:first-child::before { background: var(--accent); }
+
+    .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem; }
+    .job-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem; letter-spacing: -0.01em;
+    }
+    .job-date {
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent);
+      background: var(--accent-light); padding: 0.25rem 0.75rem; border-radius: 2px;
+    }
+    .job-company { font-size: 0.88rem; font-weight: 600; color: var(--mid); margin-bottom: 1rem; letter-spacing: 0.03em; }
+    .job-bullets { list-style: none; }
+    .job-bullets li {
+      font-size: 0.92rem; color: var(--mid); padding: 0.35rem 0 0.35rem 1.25rem;
+      position: relative; line-height: 1.65;
+    }
+    .job-bullets li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--accent); font-size: 0.8rem; top: 0.42rem;
+    }
+
+    /* ── PROJECTS / PORTFOLIO ── */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--cream); border: 1px solid var(--rule); border-radius: 6px;
+      padding: 2rem; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+    .project-icon {
+      width: 44px; height: 44px; border-radius: 4px;
+      background: var(--accent-light); display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin-bottom: 1.25rem;
+    }
+    .project-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem; margin-bottom: 0.6rem;
+    }
+    .project-desc { font-size: 0.9rem; color: var(--mid); line-height: 1.7; }
+    .project-metric {
+      margin-top: 1.25rem; padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.82rem; font-weight: 600; color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .skill-category { }
+    .skill-cat-title {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink); margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem; border-bottom: 2px solid var(--accent);
+    }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-chip {
+      font-size: 0.82rem; font-weight: 400;
+      border: 1px solid var(--rule); border-radius: 3px;
+      padding: 0.35rem 0.85rem; color: var(--mid);
+      background: var(--white); transition: all 0.15s;
+    }
+    .skill-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+    /* ── EDUCATION ── */
+    .education-card {
+      display: flex; gap: 2.5rem; align-items: flex-start;
+      background: var(--accent); color: var(--white);
+      padding: 3rem; border-radius: 8px; max-width: 700px;
+    }
+    .edu-icon {
+      font-size: 2.5rem; flex-shrink: 0; opacity: 0.85;
+    }
+    .edu-degree {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem; margin-bottom: 0.35rem; line-height: 1.15;
+    }
+    .edu-school { font-size: 0.92rem; font-weight: 500; opacity: 0.8; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--ink); color: var(--white); }
+    #contact .section-label { color: #7EB89A; }
+    #contact .section-title { color: var(--white); }
+    #contact .section-title em { color: #7EB89A; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .contact-intro { font-size: 1.05rem; color: rgba(255,255,255,0.6); line-height: 1.75; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      text-decoration: none; color: var(--white);
+      padding: 1.1rem 1.5rem; border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px; transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: #7EB89A; background: rgba(126,184,154,0.08); }
+    .contact-link-icon { font-size: 1.1rem; opacity: 0.7; }
+    .contact-link-text { font-size: 0.95rem; font-weight: 500; }
+    .contact-link-sub { font-size: 0.78rem; opacity: 0.5; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.3);
+      padding: 1.5rem 5vw; font-size: 0.78rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      #hero { grid-template-columns: 1fr; padding-top: 7rem; gap: 3rem; }
+      .hero-stats { grid-template-columns: repeat(3,1fr); }
+      #about .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Daniel Greger</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Principal Success Manager · Enterprise SaaS</p>
+      <h1 class="hero-name">Daniel<br><em>Greger</em></h1>
+      <p class="hero-summary">
+        Strategic Customer Success leader with 10+ years driving enterprise adoption, 
+        revenue growth, and AI transformation across Slack, Salesforce, and beyond. 
+        Trusted advisor to C-level executives managing $14M+ portfolios.
+      </p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View Experience</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">$14M</div>
+        <div class="stat-label">Portfolio ARR</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">95%</div>
+        <div class="stat-label">Retention Rate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">About Me</span>
+        <h2 class="section-title">Turning relationships into <em>results</em></h2>
+      </div>
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="about-body">
+            <p>
+              I'm a Principal Success Manager at Slack, a Salesforce Company, where I own relationships 
+              with 8 enterprise and large enterprise technology customers representing $14M in annual revenue. 
+              My work sits at the intersection of enterprise strategy, executive relationship management, 
+              and AI-powered transformation.
+            </p>
+            <p>
+              Over the past decade, I've helped organizations across the technology, communications, 
+              and media sectors unlock the full value of their SaaS investments — from reducing churn and 
+              accelerating adoption to building C-suite partnerships that last. I'm especially energized by 
+              the intersection of AI and customer success, having led Slack + Salesforce AI agent integrations 
+              and developed AI strategy content adopted by global CS teams.
+            </p>
+            <p>
+              Before Slack, I spent years at Ultimate Kronos Group guiding HR tech transformations for 
+              enterprise clients, and I hold multiple certifications in AI, Salesforce, and Slack administration.
+            </p>
+          </div>
+          <div class="certifications">
+            <p class="cert-title">Certifications & Professional Development</p>
+            <ul class="cert-list">
+              <li>University of Pennsylvania — AI for Business</li>
+              <li>Salesforce Agentblazer Innovator</li>
+              <li>Salesforce Certified AI Associate</li>
+              <li>DeepLearning.AI — AI for Everyone</li>
+              <li>Google Prompting Essentials & AI Essentials</li>
+              <li>Slack Administrator Certification</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="about-aside reveal">
+          <div class="aside-block">
+            <p class="aside-label">Location</p>
+            <p class="aside-value">Remote — Florida, USA</p>
+          </div>
+          <div class="aside-block">
+            <p class="aside-label">Current Role</p>
+            <p class="aside-value">Principal Success Manager<br>Slack, a Salesforce Company</p>
+          </div>
+          <div class="aside-block">
+            <p class="aside-label">Education</p>
+            <p class="aside-value">B.S. Finance<br>Florida State University</p>
+          </div>
+          <div class="aside-block">
+            <p class="aside-label">Specialties</p>
+            <div class="tag-list">
+              <span class="tag">AI Strategy</span>
+              <span class="tag">Enterprise SaaS</span>
+              <span class="tag">Executive Relationships</span>
+              <span class="tag">Slack</span>
+              <span class="tag">Salesforce</span>
+              <span class="tag">Churn Reduction</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Work Experience</span>
+        <h2 class="section-title">A decade of <em>enterprise impact</em></h2>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <div class="job-header">
+            <h3 class="job-title">Principal Success Manager</h3>
+            <span class="job-date">Feb 2025 – Present</span>
+          </div>
+          <p class="job-company">Slack, a Salesforce Company · Remote, FL</p>
+          <ul class="job-bullets">
+            <li>Own relationships with 8 enterprise technology customers accounting for $14M annual revenue</li>
+            <li>Drove $2M in net new revenue while sustaining a 95% customer retention rate in the past fiscal year</li>
+            <li>Led enterprise adoption of Slack + Salesforce AI agent integrations — 260 agent activations in 6 months post-launch</li>
+            <li>Created AI vision and strategy content adopted by global CS teams, achieving 80% penetration across accounts</li>
+            <li>Deliver semiannual business reviews to customer executives covering utilization, maturity scores, and product roadmap</li>
+            <li>Established operational rigor and KPI reporting best practices for the global Slack CSM field</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="job-header">
+            <h3 class="job-title">Senior Success Manager</h3>
+            <span class="job-date">Apr 2021 – Feb 2025</span>
+          </div>
+          <p class="job-company">Slack, a Salesforce Company · Remote, FL</p>
+          <ul class="job-bullets">
+            <li>Served as trusted advisor to enterprise communications, media, and technology clients totaling ~$13M ARR</li>
+            <li>Maintained 95% retention YoY and grew annual contract value by $5M across all accounts over three fiscal years</li>
+            <li>Managed C-level executive relationships to drive product utilization and foster executive sponsorships</li>
+            <li>Achieved an average of 90% license utilization by partnering on use cases for upselling and add-on sales</li>
+            <li>Led cross-functional projects spanning Product, Engineering, Marketing, and Enablement teams</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="job-header">
+            <h3 class="job-title">Customer Success Manager</h3>
+            <span class="job-date">Mar 2019 – Mar 2021</span>
+          </div>
+          <p class="job-company">Ultimate Kronos Group · New York, NY</p>
+          <ul class="job-bullets">
+            <li>Managed a book of 20 enterprise clients totaling $10M in annual revenue</li>
+            <li>Provided strategic guidance for HR Service Delivery platforms, improving operational efficiencies by 50%+</li>
+            <li>Collaborated with project managers to build custom Employee Case Management workflows driving 90% adoption</li>
+            <li>Increased executive sponsor NPS by 45 points YoY through proactive engagements and strategic initiatives</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="job-header">
+            <h3 class="job-title">Lead Account Manager</h3>
+            <span class="job-date">Feb 2017 – Mar 2019</span>
+          </div>
+          <p class="job-company">Ultimate Kronos Group · New York, NY</p>
+          <ul class="job-bullets">
+            <li>Managed 120+ client relationships totaling $18M annual revenue with a 97% retention rate</li>
+            <li>Acted as client escalation point, maintaining 92%+ extremely satisfied survey results</li>
+            <li>Increased product usability by 25% during year-end and open enrollment seasons via proactive outreach</li>
+            <li>Presented UltiPro Compensation Management as a subject matter expert to 200+ customers at the 2018 Connections Conference</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Projects & Achievements</span>
+        <h2 class="section-title">Highlights that <em>moved the needle</em></h2>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-icon">🤖</div>
+          <h3 class="project-name">AI Agent Integration Rollout</h3>
+          <p class="project-desc">Led the enterprise-wide adoption of Slack + Salesforce AI agent integrations across a cohort of large enterprise technology customers, driving rapid activation from zero to scale.</p>
+          <p class="project-metric">260 agent activations · 6 months post-launch</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-icon">📊</div>
+          <h3 class="project-name">Global AI Strategy Content</h3>
+          <p class="project-desc">Developed AI vision and strategy frameworks leveraged by Slack's global Customer Success teams to align enterprise customers with emerging AI roadmaps and capabilities.</p>
+          <p class="project-metric">80% penetration across managed accounts</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-icon">📈</div>
+          <h3 class="project-name">$5M Contract Value Growth</h3>
+          <p class="project-desc">Crafted and executed joint success plans with enterprise accounts that drove consistent upselling of licenses and add-on products, compounding revenue growth year over year.</p>
+          <p class="project-metric">$5M ACV growth over 3 fiscal years</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-icon">🎤</div>
+          <h3 class="project-name">Connections Conference 2018</h3>
+          <p class="project-desc">Selected as a subject matter expert to present the UltiPro Compensation Management product suite to a large audience of enterprise customers at UKG's annual user conference.</p>
+          <p class="project-metric">Presented to 200+ enterprise customers</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-icon">⚙️</div>
+          <h3 class="project-name">CSM Field Operations Uplift</h3>
+          <p class="project-desc">Partnered cross-functionally to establish KPI reporting infrastructure and operational best practices that elevated consistency and performance across the global Slack CSM organization.</p>
+          <p class="project-metric">Adopted globally by Slack CS field teams</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-icon">❤️</div>
+          <h3 class="project-name">NPS Transformation at UKG</h3>
+          <p class="project-desc">Designed and executed a series of proactive executive engagement initiatives and strategic programs that dramatically shifted customer sentiment and satisfaction at the executive sponsor level.</p>
+          <p class="project-metric">+45 NPS points year-over-year</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Skills & Tools</span>
+        <h2 class="section-title">The <em>toolkit</em></h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category reveal">
+          <p class="skill-cat-title">AI & Emerging Tech</p>
+          <div class="skill-chips">
+            <span class="skill-chip">AI Strategy</span>
+            <span class="skill-chip">AI Agents</span>
+            <span class="skill-chip">AI Prompting</span>
+            <span class="skill-chip">Agentforce</span>
+            <span class="skill-chip">Google Gemini</span>
+            <span class="skill-chip">ChatGPT</span>
+            <span class="skill-chip">Claude</span>
+            <span class="skill-chip">Google AI Studio</span>
+          </div>
+        </div>
+        <div class="skill-category reveal">
+          <p class="skill-cat-title">Customer Success & Strategy</p>
+          <div class="skill-chips">
+            <span class="skill-chip">Executive Relationship Mgmt</span>
+            <span class="skill-chip">Change Management</span>
+            <span class="skill-chip">Value Realization</span>
+            <span class="skill-chip">Project Management</span>
+            <span class="skill-chip">Data Analysis</span>
+            <span class="skill-chip">M&A</span>
+            <span class="skill-chip">Release Readiness</span>
+          </div>
+        </div>
+        <div class="skill-category reveal">
+          <p class="skill-cat-title">Platforms & Tools</p>
+          <div class="skill-chips">
+            <span class="skill-chip">Slack Enterprise Grid</span>
+            <span class="skill-chip">Salesforce CRM</span>
+            <span class="skill-chip">Gainsight</span>
+            <span class="skill-chip">JIRA</span>
+            <span class="skill-chip">Confluence</span>
+            <span class="skill-chip">Microsoft SQL Server</span>
+            <span class="skill-chip">Google Workspace</span>
+            <span class="skill-chip">Advanced Excel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Education</span>
+        <h2 class="section-title">Academic <em>foundation</em></h2>
+      </div>
+      <div class="education-card reveal">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <h3 class="edu-degree">Bachelor of Science, Finance</h3>
+          <p class="edu-school">Florida State University · Tallahassee, FL</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Contact</span>
+        <h2 class="section-title">Let's <em>connect</em></h2>
+      </div>
+      <div class="contact-grid">
+        <p class="contact-intro reveal">
+          Whether you're looking to discuss enterprise strategy, AI adoption, 
+          or just want to connect — I'd love to hear from you.
+        </p>
+        <div class="contact-links reveal">
+          <a href="mailto:dangreger92@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉</span>
+            <div>
+              <p class="contact-link-text">dangreger92@gmail.com</p>
+              <p class="contact-link-sub">Email</p>
+            </div>
+          </a>
+          <a href="tel:9546629669" class="contact-link">
+            <span class="contact-link-icon">☎</span>
+            <div>
+              <p class="contact-link-text">(954) 662-9669</p>
+              <p class="contact-link-sub">Phone</p>
+            </div>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="contact-link">
+            <span class="contact-link-icon">in</span>
+            <div>
+              <p class="contact-link-text">LinkedIn Profile</p>
+              <p class="contact-link-sub">Connect professionally</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Daniel Greger</span>
+    <span>Principal Success Manager · Slack, a Salesforce Company</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
